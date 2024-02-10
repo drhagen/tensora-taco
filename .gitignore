@@ -1,0 +1,13 @@
+# python
+**/__pycache__
+**/*.egg-info
+
+# setuptools
+/build
+/dist
+/src/tensora_taco/taco
+
+# coverage
+/.coverage*
+/htmlcov
+/coverage.xml
