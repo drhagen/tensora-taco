@@ -50,7 +50,7 @@ class TensoraBdistWheel(bdist_wheel):
 
 setup(
     name="tensora-taco",
-    version="0.1.0a1",
+    version="0.1.0",
     description="Provides TACO as an alternative kernel generator to Tensora.",
     long_description=Path("README.md").read_text(encoding="utf-8"),
     long_description_content_type="text/markdown",

@@ -31,5 +31,3 @@ jobs:
         run: 'test -f dist/tensora-taco-$(echo ${{ github.ref_name }} | cut -c 2-).tar.gz'
       - name: Upload distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-            repository-url: https://test.pypi.org/legacy/
