@@ -24,9 +24,9 @@ jobs:
           python-version: ${{ env.python-version }}
           cache: pip
       - name: Install environment
-        run: pip install -r requirements.txt -r dev-requirements.txt
+        run: pip install build==1.0.3
       - name: Build release with Setuptools
-        run: python setup.py sdist
+        run: python -m build --sdist
       - name: Check that tag version and sdist version match
         run: 'test -f dist/tensora-taco-${echo ${{ github.ref_name }} | cut -c 2-}.tar.gz'
       - name: Upload distribution to PyPI
