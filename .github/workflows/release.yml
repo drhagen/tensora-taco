@@ -7,6 +7,7 @@ on:
 
 env:
   python-version: "3.10"
+  poetry-version: "1.7.1"
 
 jobs:
   pypi-publish:
@@ -18,16 +19,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Install Poetry
+        run: pipx install poetry==${{ env.poetry-version }}
       - name: Install Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.python-version }}
-          cache: pip
-      - name: Install environment
-        run: pip install build==1.0.3
-      - name: Build release with Setuptools
-        run: python -m build --sdist
-      - name: Check that tag version and sdist version match
-        run: 'test -f dist/tensora-taco-$(echo ${{ github.ref_name }} | cut -c 2-).tar.gz'
+      - name: Build release with Poetry
+        run: poetry build
+      - name: Check that tag version and Poetry version match
+        run: '[[ "v$(poetry version --short)" == "${{ github.ref_name }}" ]]'
       - name: Upload distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
