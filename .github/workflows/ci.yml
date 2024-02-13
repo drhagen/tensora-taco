@@ -22,7 +22,7 @@ jobs:
         with:
           submodules: true
       - name: Install Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
@@ -34,7 +34,7 @@ jobs:
         # I have no idea where these come from, but they break report generation
         run: find . -name ".coverage.*.Mac-*" -delete
       - name: Store coverage
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage
           path: .coverage.*
@@ -45,14 +45,14 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Install Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.python-version }}
           cache: pip
       - name: Install environment
         run: pip install -r requirements.txt -r dev-requirements.txt
       - name: Fetch coverage
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: coverage
       - name: Combine coverage and generate report
@@ -67,7 +67,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Install Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.python-version }}
           cache: pip
