@@ -28,7 +28,7 @@ jobs:
       - name: Build release with Setuptools
         run: python -m build --sdist
       - name: Check that tag version and sdist version match
-        run: 'test -f dist/tensora-taco-${echo ${{ github.ref_name }} | cut -c 2-}.tar.gz'
+        run: 'test -f dist/tensora-taco-$(echo ${{ github.ref_name }} | cut -c 2-).tar.gz'
       - name: Upload distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
