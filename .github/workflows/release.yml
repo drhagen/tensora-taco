@@ -20,7 +20,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
       - name: Install Poetry
         run: pipx install poetry==${{ env.poetry-version }}
       - name: Install Python
@@ -31,5 +31,7 @@ jobs:
         run: poetry build -f sdist
       - name: Check that tag version and Poetry version match
         run: '[[ "v$(poetry version --short)" == "${{ github.ref_name }}" ]]'
+      - name: Ensure that the sdist can be build into a wheel
+        run: pip install --use-pep517 --check-build-dependencies dist/tensora_taco-$(poetry version --short).tar.gz
       - name: Upload distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
