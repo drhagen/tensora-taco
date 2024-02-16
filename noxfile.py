@@ -7,7 +7,8 @@ options.sessions = ["test", "coverage", "lint"]
 
 @session(python=["3.10", "3.11", "3.12"])
 def test(s: Session):
-    s.install(".", "pytest", "pytest-cov")
+    # Needs to be kept in sync with poetry.lock
+    s.install(".", "pytest==7.3.2", "pytest-cov==4.1.0")
     s.env["COVERAGE_FILE"] = f".coverage.{s.python}.{platform.system()}"
     s.run("python", "-m", "pytest", "--cov", "tensora_taco", "tests")
 
