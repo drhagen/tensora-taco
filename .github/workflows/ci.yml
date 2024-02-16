@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          submodules: true
       - name: Install Poetry
         run: pipx install poetry==${{ env.poetry-version }}
       - name: Install Python ${{ matrix.python-version }}
@@ -53,7 +55,8 @@ jobs:
           python-version: ${{ env.python-version }}
           cache: poetry
       - name: Install environment
-        run: poetry install
+        # Use --no-root because taco submodule is not checked out
+        run: poetry install --no-root
       - name: Fetch coverage
         uses: actions/download-artifact@v4
         with:
@@ -78,7 +81,8 @@ jobs:
           python-version: ${{ env.python-version }}
           cache: poetry
       - name: Install environment
-        run: poetry install
+        # Use --no-root because taco submodule is not checked out
+        run: poetry install --no-root
       - name: Run code quality checks
         run: poetry run nox -s lint
   poetry-check:
