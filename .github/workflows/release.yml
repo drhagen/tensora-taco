@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: ${{ env.python-version }}
       - name: Build release with Poetry
-        run: poetry build
+        run: poetry build -f sdist
       - name: Check that tag version and Poetry version match
         run: '[[ "v$(poetry version --short)" == "${{ github.ref_name }}" ]]'
       - name: Upload distribution to PyPI

@@ -33,3 +33,64 @@ kernel = result.unwrap()
 #   return 0;
 # }
 ```
+
+## Contributing
+
+`tensora-taco` is a free and open source project developed under an MIT license. Development occurs at the [GitHub project](https://github.com/drhagen/tensora-taco).
+
+### Cloning the repo
+
+To make a local copy of `tensora-taco`, clone the repository with git. This project depends on TACO at build time as a submodule, so it must be cloned as well in order to build the project:
+
+```shell
+git clone --recurse-submodules https://github.com/drhagen/tabeline.git
+```
+
+### Installing from source
+
+`tensora-taco` uses Poetry as its packaging and dependency manager. In whatever Python environment you prefer, [install Poetry](https://python-poetry.org/docs/) and then use Poetry to install this package and its dependencies:
+
+```shell
+pip install poetry
+poetry install
+```
+
+### Testing
+
+`tensora-taco` uses pytest to run the tests in the `tests/` directory. The test command is encapsulated with Nox:
+
+```shell
+poetry run nox -s test
+```
+
+This will try to test with all compatible Python versions that `nox` can find. To run the tests with only a particular version, run something like this:
+
+```shell
+poetry run nox -s test-3.11
+```
+
+It is good to run the tests locally before making a PR, but it is not necessary to have all Python versions run. It is rare for a failure to appear in a single version, and the CI will catch it anyway.
+
+
+### Code quality
+
+`tensora-taco` uses Ruff to ensure a minimum standard of code quality. The code quality commands are encapsulated with Nox:
+
+```shell
+poetry run nox -s ruff
+```
+
+### Making a release
+
+1. Bump
+    1. Increment version in `pyproject.toml`
+    2. Commit with message "Bump version number to X.Y.Z"
+    3. Push commit to GitHub
+    4. Check [CI](https://github.com/drhagen/tensora-taco/actions/workflows/ci.yml) to ensure all tests pass
+2. Tag
+    1. Tag commit with "vX.Y.Z"
+    2. Push tag to GitHub
+    3. Wait for [build](https://github.com/drhagen/tensora-taco/actions/workflows/release.yml) to finish
+    4. Check [PyPI](https://pypi.org/project/tensora-taco/) for good upload
+3. Document
+    1. Create [GitHub release](https://github.com/drhagen/tensora-taco/releases) with name "Tensora TACO X.Y.Z" and major changes in body
