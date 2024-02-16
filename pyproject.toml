@@ -19,6 +19,9 @@ classifiers = [
 # wheel include must be in build.py because Setuptools makes the wheel
 include = [{ path = "src/taco", format = "sdist" }]
 
+# TACO will not build if it finds a broken git install
+exclude = ["**/.git*"]
+
 [tool.poetry.dependencies]
 python = "^3.10"
 returns = ">=0.20"
