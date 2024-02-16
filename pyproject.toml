@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tensora-taco"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python wrapper around the TACO CLI as an alternative kernel generator for Tensora"
 authors = ["David Hagen <david@drhagen.com>"]
 license = "MIT"
