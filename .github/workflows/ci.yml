@@ -39,7 +39,7 @@ jobs:
       - name: Store coverage
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ matrix.python-version }}-${{ matrix.os}}
+          name: coverage-${{ matrix.python-version }}-${{ matrix.os }}
           path: .coverage.*
   coverage:
     needs: test
@@ -65,8 +65,9 @@ jobs:
       - name: Combine coverage and generate report
         run: poetry run nox -s coverage
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
   lint:
     runs-on: ubuntu-22.04
@@ -92,7 +93,7 @@ jobs:
       - name: Install Poetry
         run: pipx install poetry==${{ env.poetry-version }}
       - name: Install Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.python-version }}
       - name: Validate Poetry configuration and lockfile freshness
